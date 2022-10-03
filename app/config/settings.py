@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-from django.template.context_processors import media
-
 import config.db as db
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -46,6 +44,7 @@ INSTALLED_APPS = [
     'core.homepage',
     'core.login',
     'core.user',
+    'core.reports',
 ]
 
 MIDDLEWARE = [
@@ -105,9 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-US'
+LANGUAGE_CODE = 'es-ec'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Guatemala'
 
 USE_I18N = True
 
@@ -119,6 +118,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles/')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
