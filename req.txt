@@ -7,3 +7,4 @@ psycopg2==2.9.3
 pytz==2022.2.1
 tzdata==2022.2
 xhtml2pdf==0.2.8
+weasyprint==56.1

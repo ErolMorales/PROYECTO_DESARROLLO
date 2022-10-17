@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum, DecimalField
 from django.db.models.functions import Coalesce
 from django.http import JsonResponse
@@ -12,12 +13,16 @@ from core.erp.models import Sale, Product, DetSale
 from random import randint
 
 
-class DashboardView(TemplateView):
+class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard.html'
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        request.user.get_group_session()
+        return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         data = {}
@@ -38,7 +43,7 @@ class DashboardView(TemplateView):
                 }
             elif action == 'get_graph_online':
                 data = {'y': randint(1, 100)}
-
+                print(data)
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:
@@ -53,8 +58,8 @@ class DashboardView(TemplateView):
                 total = Sale.objects.filter(date_joined__year=year, date_joined__month=m).aggregate(
                     r=Coalesce(Sum('total'), 0, output_field=DecimalField())).get('r')
                 data.append(float(total))
-        except Exception as ex:
-            print(ex)
+        except:
+            pass
         return data
 
     def get_graph_sales_products_year_month(self):
@@ -71,8 +76,8 @@ class DashboardView(TemplateView):
                         'name': p.name,
                         'y': float(total)
                     })
-        except Exception as ex:
-            print(ex)
+        except:
+            pass
         return data
 
     def get_context_data(self, **kwargs):
