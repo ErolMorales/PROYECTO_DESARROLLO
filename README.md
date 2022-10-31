@@ -1,0 +1,8 @@
+#DESARROLLO WEB
+
+EROL ISAIAS CHUN MORALES
+4090-19-9801
+
+PRESENTACION:
+https://docs.google.com/presentation/d/1UG5qbX1vVAwrjXCNU6rD1y8s89JKJTN4/edit?usp=share_link&ouid=107180932033137253524&rtpof=true&sd=true
+VIDEO EJECUCION DE LA APLICACION:
